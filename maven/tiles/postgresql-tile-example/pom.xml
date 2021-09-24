@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- The micronaut-java-parent module preconfigure all the version and plugins, so you only need to add it as your parent! -->
+	<parent>
+		<groupId>io.archimedesfw.maven.micronaut</groupId>
+		<artifactId>micronaut-java-parent</artifactId>
+		<version>2.4.2</version>
+	</parent>
+
+	<groupId>io.archimedesfw.maven.tiles.examples</groupId>
+	<artifactId>postgresql-tile-example</artifactId>
+	<version>0.0.1</version>
+
+	<name>${project.groupId}:${project.artifactId}</name>
+	<description>Maven Postgresql tile example.</description>
+	<url>https://www.archimedesfw.io/</url>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>manual</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git:git://github.com/archimedes-projects/archimedes-maven-tiles-examples.git</connection>
+		<developerConnection>scm:git:ssh://github.com:archimedes-projects/archimedes-maven-tiles-examples.git</developerConnection>
+		<tag>main</tag>
+		<url>https://github.com/archimedes-projects/archimedes-maven-tiles-examples</url>
+	</scm>
+	<developers>
+		<developer>
+			<id>cgmarcos-autentia</id>
+			<name>Carlos Garcia</name>
+		</developer>
+	</developers>
+
+	<properties>
+		<postgresql.version>42.2.20</postgresql.version>
+		<docker-maven-plugin.version>0.37.0</docker-maven-plugin.version>
+		<assertj.version>3.19.0</assertj.version>
+		<hamcrest.version>2.2</hamcrest.version>
+
+		<tiles-maven-plugin.version>2.24</tiles-maven-plugin.version>
+		<postgresql-tile.version>0.0.3-SNAPSHOT</postgresql-tile.version>
+		<it.archimedesfw.postgresql.image>postgres:10-alpine</it.archimedesfw.postgresql.image>
+		<it.archimedesfw.postgresql.host>localhost</it.archimedesfw.postgresql.host>
+		<it.archimedesfw.postgresql.port>5432</it.archimedesfw.postgresql.port>
+
+
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>io.repaint.maven</groupId>
+					<artifactId>tiles-maven-plugin</artifactId>
+					<version>${tiles-maven-plugin.version}</version>
+					<extensions>true</extensions>
+					<configuration>
+						<applyBefore>io.archimedesfw.maven.micronaut:micronaut-java-parent</applyBefore>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>io.repaint.maven</groupId>
+				<artifactId>tiles-maven-plugin</artifactId>
+				<configuration>
+					<tiles>
+						<tile>io.archimedesfw.maven.tiles:postgresql-tile:${postgresql-tile.version}</tile>
+					</tiles>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.archimedesfw.data</groupId>
+			<artifactId>archimedes-data-jdbc-micronaut</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>io.archimedesfw.data</groupId>
+			<artifactId>archimedes-data-tx-micronaut</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.micronaut</groupId>
+			<artifactId>micronaut-inject-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
+		<!-- Logging system is already integrated with Micronaut so only need to add the dependency to use it -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- Dependencies related to postgresql and hikari db pool -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.micronaut.sql</groupId>
+			<artifactId>micronaut-jdbc-hikari</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Add typical dependencies for testing with Junit 5 -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>${assertj.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest</artifactId>
+			<version>${hamcrest.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.micronaut.test</groupId>
+			<artifactId>micronaut-test-junit5</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>
