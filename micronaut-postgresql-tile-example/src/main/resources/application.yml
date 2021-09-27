@@ -1,0 +1,15 @@
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/archimedes
+    username: postgres
+    password: verysecret
+    driverClassName: org.postgresql.Driver
+    minimumIdle: 1
+    maximumPoolSize: 5
+
+flyway:
+  datasources:
+    default:
+      locations:
+        - classpath:db/schema
+        - classpath:db/data
