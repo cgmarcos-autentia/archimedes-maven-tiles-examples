@@ -1,19 +1,18 @@
 package io.archimedesfw.maven.tiles.postgresql.example.domain.persistence;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.validation.constraints.NotNull;
-
 import io.archimedesfw.maven.tiles.postgresql.example.domain.User;
 import io.micronaut.data.annotation.Repository;
 import io.micronaut.data.jdbc.annotation.JdbcRepository;
 import io.micronaut.data.model.query.builder.sql.Dialect;
 import io.micronaut.data.repository.CrudRepository;
 
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 @JdbcRepository(dialect = Dialect.POSTGRES)
-public interface UserRepository extends CrudRepository<User, Long>{
+public interface UserRepository extends CrudRepository<User, Long> {
 
     Optional<User> findById(@NotNull Long id);
 
@@ -21,7 +20,7 @@ public interface UserRepository extends CrudRepository<User, Long>{
     List<User> findAll();
 
     @NotNull
-    User save (@NotNull User user);
+    User save(@NotNull User user);
 
     @NotNull
     User update(@NotNull User user);

@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @MappedEntity("users")
-public class User{
+public class User {
 
     @Id
     Long id;

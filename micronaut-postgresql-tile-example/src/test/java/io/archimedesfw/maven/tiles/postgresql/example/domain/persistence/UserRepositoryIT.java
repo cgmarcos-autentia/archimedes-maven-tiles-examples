@@ -1,17 +1,16 @@
 package io.archimedesfw.maven.tiles.postgresql.example.domain.persistence;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.jupiter.api.Test;
-
 import io.archimedesfw.maven.tiles.postgresql.example.domain.User;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @MicronautTest
-class UserRepositoryIT{
+class UserRepositoryIT {
 
-    private final static User USER_NEW   = new User(3L, "ffernandez", "Federico", "Fernandez");
+    private final static User USER_NEW = new User(3L, "ffernandez", "Federico", "Fernandez");
     private final static User USER_TEST1 = new User(1L, "jdoe", "John", "Doe");
     private final static User USER_TEST2 = new User(2L, "asmith", "Addam", "Smith");
 
