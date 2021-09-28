@@ -1,0 +1,5 @@
+micronaut:
+  http:
+    services:
+      user-api-client:
+        url: http://localhost:8080/

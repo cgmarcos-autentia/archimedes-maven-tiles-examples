@@ -1,0 +1,13 @@
+micronaut:
+  application:
+    name: micronaut-app-launcher-tile-example
+endpoints:
+  all:
+    path: /management
+    enabled: true
+    sensitive: true
+  health:
+    sensitive: false
+logger:
+  levels:
+    root: INFO
