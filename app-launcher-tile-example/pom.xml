@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.archimedesfw.maven.tiles.examples</groupId>
+        <artifactId>archimedes-examples-parent</artifactId>
+        <version>0.0.3-SNAPSHOT</version>
+    </parent>
+
+    <groupId>io.archimedesfw.maven.tiles.examples</groupId>
+    <artifactId>app-launcher-tile-example</artifactId>
+    <version>0.0.3-SNAPSHOT</version>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Maven App Launcher tile example.</description>
+    <url>https://www.archimedesfw.io/</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>manual</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git://github.com/archimedes-projects/archimedes-maven-tiles-examples.git</connection>
+        <developerConnection>scm:git:ssh://github.com:archimedes-projects/archimedes-maven-tiles-examples.git
+        </developerConnection>
+        <tag>main</tag>
+        <url>https://github.com/archimedes-projects/archimedes-maven-tiles-examples</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>cgmarcos-autentia</id>
+            <name>Carlos Garcia</name>
+        </developer>
+    </developers>
+
+    <properties>
+        <docker-maven-plugin.version>0.37.0</docker-maven-plugin.version>
+        <app-launcher-tile.version>0.0.3-SNAPSHOT</app-launcher-tile.version>
+        <assertj.version>3.19.0</assertj.version>
+        <hamcrest.version>2.2</hamcrest.version>
+
+        <tiles-maven-plugin.version>2.24</tiles-maven-plugin.version>
+
+        <exec.mainClass>io.archimedesfw.maven.tiles.applauncher.example.Application</exec.mainClass>
+        <docker.from.image>gcr.io/distroless/java:11</docker.from.image>
+        <docker.image.name>${project.artifactId}</docker.image.name>
+        <docker.tag>${project.version}</docker.tag>
+        <!--suppress UnresolvedMavenProperty -->
+        <docker.to.image>${docker.image.name}</docker.to.image>
+        <docker.customTag>0.0.3-SNAPSHOT</docker.customTag>
+
+        <it.archimedesfw.app.docker.image>local/${project.artifactId}:${docker.tag}</it.archimedesfw.app.docker.image>
+        <!-- Forcing service port for IT example with container -->
+        <it.archimedesfw.app.port>8080</it.archimedesfw.app.port>
+        <it.archimedesfw.app.stopMode>kill</it.archimedesfw.app.stopMode>
+
+
+
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>io.repaint.maven</groupId>
+                    <artifactId>tiles-maven-plugin</artifactId>
+                    <version>${tiles-maven-plugin.version}</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <applyBefore>io.archimedesfw.maven.micronaut:micronaut-java-parent</applyBefore>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>io.repaint.maven</groupId>
+                <artifactId>tiles-maven-plugin</artifactId>
+                <configuration>
+                    <tiles>
+                        <tile>io.archimedesfw.maven.tiles:app-launcher-tile:${app-launcher-tile.version}</tile>
+                    </tiles>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <configuration>
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                    <from>
+                        <image>${docker.from.image}</image>
+                    </from>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>dockerBuild</goal>
+                        </goals>
+                        <configuration>
+                            <to>
+                                <image>local/${docker.image.name}:${docker.tag}</image>
+                            </to>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-http-server-netty</artifactId>
+        </dependency>
+
+
+        <!-- management service to detect service is up -->
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-management</artifactId>
+        </dependency>
+
+        <!-- Logging system is already integrated with Micronaut so only need to add the dependency to use it -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- http client for integration test demo wit docker container -->
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-http-client</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Add typical dependencies for testing with Junit 5 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micronaut.test</groupId>
+            <artifactId>micronaut-test-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
+
+</project>

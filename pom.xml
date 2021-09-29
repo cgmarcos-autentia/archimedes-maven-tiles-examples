@@ -21,6 +21,7 @@
         <module>micronaut-postgresql-tile-example</module>
         <module>sqlserver-tile-example</module>
         <module>micronaut-sqlserver-tile-example</module>
+        <module>app-launcher-tile-example</module>
         <module>micronaut-app-launcher-tile-example</module>
         <module>wiremock-tile-example</module>
     </modules>
