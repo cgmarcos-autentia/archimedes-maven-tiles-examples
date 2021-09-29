@@ -1,0 +1,9 @@
+datasources:
+  default:
+    url: jdbc:sqlserver://localhost:1433;databaseName=archimedes
+    schema: archimedes
+    username: SA
+    password: V3rY.S3CreT2020
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    minimumIdle: 1
+    maximumPoolSize: 5
