@@ -1,0 +1,10 @@
+micronaut:
+  application:
+    name: micronaut-app-launcher-tile-example
+  http:
+    services:
+      wiremock-test-client:
+        url: http://localhost:8080/
+logger:
+  levels:
+    root: INFO
