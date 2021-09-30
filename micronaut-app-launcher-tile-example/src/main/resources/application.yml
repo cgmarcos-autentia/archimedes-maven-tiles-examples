@@ -1,6 +1,15 @@
 micronaut:
   application:
     name: micronaut-app-launcher-tile-example
+  security:
+    enabled: true
+    authentication: bearer
+    token:
+      jwt:
+        signatures:
+          jwks:
+            jwks-wiremock-service:
+              url: http://archimedes-it-wiremock:8080/jwks
 endpoints:
   all:
     path: /management

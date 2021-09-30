@@ -12,8 +12,7 @@ import static io.micronaut.http.HttpHeaders.*;
 @Client("user-api-client")
 @Header(name = USER_AGENT, value = "Micronaut HTTP Client")
 @Header(name = ACCEPT, value = "application/json")
-@Header(name = AUTHORIZATION, value="Bearer ${test-data.valid-token}")
-public interface UserApiTestClient {
+public interface UserApiTestClientNoToken {
     @Get("/user")
     List<UserResponse> listUsers();
 }

@@ -1,1 +1,2 @@
-# archimedes-examples
+# archimedes-maven-tiles-examples
+
