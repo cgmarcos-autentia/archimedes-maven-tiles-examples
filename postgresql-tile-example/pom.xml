@@ -38,13 +38,13 @@
     </developers>
 
     <properties>
-        <postgresql.version>42.2.20</postgresql.version>
-        <docker-maven-plugin.version>0.37.0</docker-maven-plugin.version>
         <assertj.version>3.19.0</assertj.version>
         <hamcrest.version>2.2</hamcrest.version>
 
         <tiles-maven-plugin.version>2.24</tiles-maven-plugin.version>
         <postgresql-tile.version>0.0.3-SNAPSHOT</postgresql-tile.version>
+        <postgresql.version>42.2.20</postgresql.version>
+
         <it.archimedesfw.postgresql.image>postgres:10-alpine</it.archimedesfw.postgresql.image>
         <it.archimedesfw.postgresql.host>localhost</it.archimedesfw.postgresql.host>
         <it.archimedesfw.postgresql.port>5432</it.archimedesfw.postgresql.port>
