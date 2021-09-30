@@ -38,22 +38,20 @@
     </developers>
 
     <properties>
-        <docker-maven-plugin.version>0.37.0</docker-maven-plugin.version>
-        <app-launcher-tile.version>0.0.3-SNAPSHOT</app-launcher-tile.version>
         <assertj.version>3.19.0</assertj.version>
         <hamcrest.version>2.2</hamcrest.version>
 
-        <tiles-maven-plugin.version>2.24</tiles-maven-plugin.version>
 
+        <!-- JIB-Maven-Plugin Configuration -->
         <exec.mainClass>io.archimedesfw.maven.tiles.applauncher.example.Application</exec.mainClass>
         <docker.from.image>gcr.io/distroless/java:11</docker.from.image>
         <docker.image.name>${project.artifactId}</docker.image.name>
         <docker.tag>${project.version}</docker.tag>
-        <!--suppress UnresolvedMavenProperty -->
-        <docker.to.image>${docker.image.name}</docker.to.image>
-        <docker.customTag>0.0.3-SNAPSHOT</docker.customTag>
 
-        <!-- Disabling service security -->
+        <!-- Micronaut-app-launcher-tile configuration -->
+        <tiles-maven-plugin.version>2.24</tiles-maven-plugin.version>
+        <micronaut-app-launcher-tile.version>0.0.3-SNAPSHOT</micronaut-app-launcher-tile.version>
+        <!-- Enabling service security -->
         <it.archimedesfw.micronaut.security.enabled>true</it.archimedesfw.micronaut.security.enabled>
         <it.archimedesfw.micronaut.security.jwt.enabled>true</it.archimedesfw.micronaut.security.jwt.enabled>
         <it.archimedesfw.micronaut.security.jwt.bearer.enabled>true</it.archimedesfw.micronaut.security.jwt.bearer.enabled>
@@ -64,6 +62,7 @@
         <it.archimedesfw.app.port>8080</it.archimedesfw.app.port>
         <it.archimedesfw.app.stopMode>kill</it.archimedesfw.app.stopMode>
 
+        <!-- wiremock-tile configuration -->
         <wiremock-tile.version>0.0.3-SNAPSHOT</wiremock-tile.version>
         <it-wiremock.port>8081</it-wiremock.port>
         <it.archimedes.wiremock.docker.alias>archimedes-it-wiremock</it.archimedes.wiremock.docker.alias>
@@ -92,7 +91,7 @@
                 <artifactId>tiles-maven-plugin</artifactId>
                 <configuration>
                     <tiles>
-                        <tile>io.archimedesfw.maven.tiles:micronaut-app-launcher-tile:${app-launcher-tile.version}</tile>
+                        <tile>io.archimedesfw.maven.tiles:micronaut-app-launcher-tile:${micronaut-app-launcher-tile.version}</tile>
                         <tile>io.archimedesfw.maven.tiles:wiremock-tile:${wiremock-tile.version}</tile>
                     </tiles>
                 </configuration>
