@@ -44,10 +44,7 @@
         <tiles-maven-plugin.version>2.24</tiles-maven-plugin.version>
         <wiremock-tile.version>0.0.3-SNAPSHOT</wiremock-tile.version>
 
-        <docker-maven-plugin.version>0.37.0</docker-maven-plugin.version>
-
         <it-wiremock.port>8080</it-wiremock.port>
-
     </properties>
 
     <build>
